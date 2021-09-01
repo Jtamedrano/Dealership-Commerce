@@ -5,15 +5,17 @@ import NavHeader from "../parts/NavHeader";
 
 const MainLayout: React.FC = ({ children }) => {
   return (
-    <Container>
+    <>
       <header>
         <NavHeader />
       </header>
-      <main>{children}</main>
+      <Container>
+        <main>{children}</main>
+      </Container>
       <footer>
         <MainFooter />
       </footer>
-    </Container>
+    </>
   );
 };
 

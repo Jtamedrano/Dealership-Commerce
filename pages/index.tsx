@@ -3,7 +3,7 @@ import Head from "next/head";
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <>
       <Head>
         <title>Auto Dealer</title>
       </Head>
@@ -23,7 +23,7 @@ const Home: NextPage = () => {
       </div>
       <div>Contact and Map</div>
       <div>SEO Content</div>
-    </div>
+    </>
   );
 };
 
