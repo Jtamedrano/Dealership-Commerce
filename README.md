@@ -26,4 +26,4 @@ A sample dealership application
 - Typescript
 - React
 - Next
-- SASS
+- Bootstrap
