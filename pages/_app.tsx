@@ -1,7 +1,8 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import "bootstrap/dist/css/bootstrap.css";
 import MainLayout from "../components/layouts/MainLayout";
+import "bootstrap/dist/css/bootstrap.css";
+import "../styles/index.scss";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

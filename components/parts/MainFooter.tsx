@@ -1,4 +1,5 @@
 import React from "react";
+import { Container } from "react-bootstrap";
 import NavFooter from "./NavFooter";
 
 interface FooterProps {
@@ -11,7 +12,7 @@ const MainFooter: React.FC<FooterProps> = ({
   group_name = " Auto Dealer Group",
 }) => {
   return (
-    <>
+    <Container>
       <p>
         MSRP is the Manufacturer's Suggested Retail Price, which is not
         necessarily the sale price and is not the advertised price. For specific
@@ -57,7 +58,7 @@ const MainFooter: React.FC<FooterProps> = ({
         {group_name}. All rights reserved.
       </p>
       <NavFooter />
-    </>
+    </Container>
   );
 };
 
