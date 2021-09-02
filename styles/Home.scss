@@ -11,6 +11,10 @@ $carousel-height: 510px;
   &__type {
     margin-top: 1em;
   }
+  &__SEO {
+    margin: 1em auto;
+    padding: 2em 0;
+  }
 }
 
 .carousel,
@@ -151,6 +155,21 @@ $carousel-height: 510px;
     min-height: 25vh;
     flex-basis: 50%;
     padding: 2em;
+  }
+
+  &__box.image {
+    padding: 0;
+  }
+  &__image-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
   .contact {
     padding: 4em;

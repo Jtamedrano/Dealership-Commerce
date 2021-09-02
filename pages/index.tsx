@@ -30,7 +30,16 @@ const Home: NextPage = () => {
         </div>
       </div>
       <div className="Home__services services">
-        <div className="services__box"></div>
+        <div className="services__box image">
+          <div className="services__image-wrapper">
+            <img
+              src="/assets/car-buying-1.jpg"
+              alt="Red car door being opened by someone"
+              width="100%"
+              height="100%"
+            />
+          </div>
+        </div>
         <div className="services__box">
           <h3>Shop By Price Range</h3>
           <p>Find the perfect vehicle in your price range</p>
@@ -39,8 +48,26 @@ const Home: NextPage = () => {
           <h3>Finance Options</h3>
           <p>Large range of finance options are available.</p>
         </div>
-        <div className="services__box"></div>
-        <div className="services__box"></div>
+        <div className="services__box image">
+          <div className="services__image-wrapper">
+            <img
+              src="/assets/car-buying-2.jpg"
+              alt="Negotiating Deal"
+              width="100%"
+              height="100%"
+            />
+          </div>
+        </div>
+        <div className="services__box image">
+          <div className="services__image-wrapper">
+            <img
+              src="/assets/car-service.jpg"
+              alt="Someone working on a tire"
+              width="100%"
+              height="100%"
+            />
+          </div>
+        </div>
         <div className="services__box">
           <h3>Vehicle Service</h3>
           <p>
@@ -93,9 +120,18 @@ const Home: NextPage = () => {
           </div>
           <p>See All Department Hours</p>
         </div>
-        <div className="services__box"></div>
+        <div className="services__box image">
+          <div className="services__image-wrapper">
+            <img
+              src="/assets/google-map-ph.jpg"
+              alt="Phone with google maps open"
+              width="100%"
+              height="100%"
+            />
+          </div>
+        </div>
       </div>
-      <div>
+      <div className="Home__SEO">
         <h2>
           YOUR LOCAL AUTO DEALER FOR ALL YOUR SALES, SERVICE, AND PARTS NEEDS
         </h2>
