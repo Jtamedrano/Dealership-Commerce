@@ -7,6 +7,9 @@ A sample dealership application
 ### General
 
 - [ ] Landing page
+  - [x] Landing Page Scaffold
+  - [ ] Lazy Load Images
+  - [ ] Integrate Filter Forms
 
 ### Customer View
 
@@ -26,4 +29,5 @@ A sample dealership application
 - Typescript
 - React
 - Next
+- Bootstrap
 - SASS
