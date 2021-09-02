@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Jumbotron from "../components/parts/Jumbotron";
+import { Jumbotron, SquareGrid } from "../components/parts";
 
 const Home: NextPage = () => {
   return (
@@ -12,7 +12,9 @@ const Home: NextPage = () => {
       <div className="Home__jumbotron">
         <Jumbotron />
       </div>
-      <div>Grid Nav Squares Go Here</div>
+      <div className="Home__square_grid">
+        <SquareGrid />
+      </div>
       <div>Search By Car Type Goes Here</div>
       <div>
         Services Listed
