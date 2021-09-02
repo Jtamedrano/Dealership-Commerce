@@ -12,7 +12,7 @@ const MainFooter: React.FC<FooterProps> = ({
   group_name = " Auto Dealer Group",
 }) => {
   return (
-    <Container>
+    <Container fluid="lg">
       <p>
         MSRP is the Manufacturer's Suggested Retail Price, which is not
         necessarily the sale price and is not the advertised price. For specific

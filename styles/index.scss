@@ -1,2 +1,8 @@
-@use 'MainLayout';
 @use 'Home';
+@use 'Footer';
+@use 'MainLayout';
+
+html {
+  padding: 0;
+  margin: 0;
+}

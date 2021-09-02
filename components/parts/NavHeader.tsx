@@ -4,7 +4,7 @@ import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 const NavHeader = () => {
   return (
     <Navbar bg="light" expand="lg" fixed="top">
-      <Container>
+      <Container fluid="lg">
         <Navbar.Brand href="/">Auto Dealer</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

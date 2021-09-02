@@ -7,9 +7,9 @@ $carousel-height: 510px;
     min-height: $carousel-height;
   }
 
-  &__square_grid {
+  &__square_grid,
+  &__type {
     margin-top: 1em;
-    max-width: 100%;
   }
 }
 
@@ -72,7 +72,7 @@ $carousel-height: 510px;
     }
 
     .square-item-group {
-      $color-overlay: rgba(0, 0, 0, 0.75);
+      $color-overlay: rgba(0, 0, 0, 0.6);
       $overlay: linear-gradient($color-overlay, $color-overlay);
 
       display: flex;
@@ -80,30 +80,41 @@ $carousel-height: 510px;
       align-items: stretch;
       flex-grow: 1;
 
-      .square-item {
-        margin: 0;
-        flex-basis: 30%;
-        font-size: 1rem;
-        padding: 1em;
-      }
-
       .square-item:first-of-type {
         background: $overlay, url("/assets/car-parts.jpg");
         background-position: center;
         background-repeat: none;
-        background-size: cover;
+        background-size: 180%;
+        transition: all 0.4s ease-in-out;
+        &:hover {
+          background-size: 200%;
+        }
       }
       .square-item:nth-of-type(2) {
         background: $overlay, url("/assets/driving.jpg");
         background-position: center;
         background-repeat: none;
-        background-size: cover;
+        background-size: 180%;
+        transition: all 0.3s ease-in-out;
+        &:hover {
+          background-size: 200%;
+        }
       }
       .square-item:nth-of-type(3) {
         background: $overlay, url("/assets/cars.jpg");
         background-position: center;
-        background-repeat: none;
-        background-size: cover;
+        background-repeat: no-repeat;
+        background-size: 400%;
+        transition: all 0.3s ease-in-out;
+        &:hover {
+          background-size: 475%;
+        }
+      }
+      .square-item {
+        margin: 0;
+        flex-basis: 30%;
+        font-size: 1rem;
+        padding: 1em;
       }
     }
   }
@@ -116,5 +127,47 @@ $carousel-height: 510px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0.5em;
+  margin: 0.25em;
+}
+
+.type {
+  margin-top: 2em;
+  text-align: center;
+  ul {
+    display: flex;
+    list-style: none;
+    justify-content: space-evenly;
+  }
+}
+
+.services {
+  display: flex;
+  align-items: stretch;
+  flex-flow: row wrap;
+  &__box {
+    display: flex;
+    justify-content: center;
+    flex-flow: column nowrap;
+    min-height: 25vh;
+    flex-basis: 50%;
+    padding: 2em;
+  }
+  .contact {
+    padding: 4em;
+    align-items: center;
+    text-align: center;
+    .phone {
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    &__hours {
+      width: 100%;
+    }
+    &__hours__item {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
 }
