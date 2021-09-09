@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import SearchIcon from "@material-ui/icons/Search";
 import ListIcon from "@material-ui/icons/List";
 import ViewStreamIcon from "@material-ui/icons/ViewStream";
@@ -9,6 +10,9 @@ interface Props {
 }
 
 const Search: React.FC<Props> = ({ className }) => {
+  const inventoryCount = useSelector(
+    ({ inventory }: RStore) => inventory.length
+  );
   const parentClass = "search";
   const classes = clsx([parentClass, className]);
   return (
@@ -21,7 +25,7 @@ const Search: React.FC<Props> = ({ className }) => {
       <div className={`${parentClass}__filter-details`}>
         {/* Number of Vehicles */}
         <div className={`${parentClass}__vehicle-count`}>
-          <p>28 Vehicles</p>
+          <p>{inventoryCount} Vehicles</p>
         </div>
         {/* View Type */}
         <div className={`${parentClass}__filter-options`}>
