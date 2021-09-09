@@ -12,13 +12,25 @@ const ShopLayout = (props: Props) => {
 
   useEffect(() => {
     if (!state) {
-      dispatch({ type: "ADD_FILTER", payload: { condition: "all" } });
+      dispatch({
+        type: "ADD_FILTER",
+        payload: { condition: ["new", "used", "salvaged"] },
+      });
     }
   }, []);
 
+  const getStateName = () => {
+    if (!!state && state[0].length > 1) {
+      return "All";
+    }
+
+    return state;
+  };
+
   return (
     <div className="shop">
-      {state && <h2>{state} Vehicles</h2>}
+      <title>Shop {getStateName()} Vehicles - Auto Dealer</title>
+      {state && <h1>{getStateName()} Vehicles</h1>}
       <Search className="shop__search" />
       <div className="shop__main">
         {/* filter */}
