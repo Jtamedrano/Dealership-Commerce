@@ -1,5 +1,5 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Filter, InventoryView, Search } from "../parts/Shop";
 
 interface Props {}
@@ -8,6 +8,14 @@ const ShopLayout = (props: Props) => {
   const state = useSelector(
     (state: RStore) => state.inventory.filters.condition
   );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!state) {
+      dispatch({ type: "ADD_FILTER", payload: { condition: "all" } });
+    }
+  }, []);
+
   return (
     <div className="shop">
       {state && <h2>{state} Vehicles</h2>}

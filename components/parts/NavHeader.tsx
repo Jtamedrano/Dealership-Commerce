@@ -7,9 +7,11 @@ import { Dispatch } from "redux";
 const NavHeader = () => {
   const dispatch = useDispatch();
   return (
-    <Navbar bg="light" expand="lg" fixed="top">
+    <Navbar expand="lg" fixed="top">
       <Container fluid="sm">
-        <Navbar.Brand href="/">Auto Dealer</Navbar.Brand>
+        <Navbar.Brand href="/" className="AutoBrand">
+          Auto Dealer
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav>
