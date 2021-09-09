@@ -1,5 +1,16 @@
 .MainLayout {
   &__container {
-    margin-top: 4em;
+    margin-top: 5em;
+    margin-bottom: 5em;
+  }
+}
+
+header nav {
+  background-color: #e6e6e6;
+
+  .AutoBrand {
+    color: #0258a4 !important;
+    font-weight: 700;
+    font-size: 1.5rem;
   }
 }

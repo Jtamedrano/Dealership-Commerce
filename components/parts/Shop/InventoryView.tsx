@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { sample_data_one } from "../../../test-data/samples";
+import { useSelector } from "react-redux";
 import InventoryCard from "./InventoryCard";
 
 interface Props {}
 
 const InventoryView = (props: Props) => {
-  const [data] = useState(sample_data_one);
+  const data = useSelector((store: RStore) => store.inventory.visibleInventory);
 
   return (
     <>

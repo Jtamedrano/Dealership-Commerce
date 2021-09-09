@@ -17,6 +17,7 @@ const InventoryCard: React.FC<Props> = ({ auto }) => {
     drive,
     msrp,
     img_url,
+    odo,
   } = auto;
 
   return (
@@ -36,6 +37,7 @@ const InventoryCard: React.FC<Props> = ({ auto }) => {
           </div>
           <div className="product-details">
             <div className="product-details__summary">
+              <p>{toIntPrice(odo)} Miles</p>
               <p>
                 {gas_mileage.city}/{gas_mileage.hwy} mpg City/Hwy
               </p>

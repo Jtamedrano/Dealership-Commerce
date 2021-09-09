@@ -20,3 +20,41 @@ declare type Auto = {
   img_url: string;
   [key: string]: any;
 };
+
+declare type filters = {
+  year?: [number, number];
+  make?: string[];
+  model?: string[];
+  trim?: string[];
+  dealer_price?: [number, number];
+  msrp?: [number, number];
+  odo?: [number, number];
+  transmission?: string[];
+  gas_mileage?: {
+    city?: [number, number];
+    hwy?: [number, number];
+    combo?: [number, number];
+  };
+  engine?: string[];
+  drive?: string[];
+  fuel?: string[];
+  condition?: "new" | "used" | "salvaged";
+  [key: string]: any;
+};
+
+declare type RStore = {
+  inventory: RInventoryStore;
+};
+
+declare type RInventoryStore = {
+  rootInventory: Auto[];
+  visibleInventory: Auto[];
+  filters: filters;
+};
+
+declare type RAction<T> = {
+  type: T;
+  payload?: any;
+};
+
+declare type RInventoryTypes = "ADD_FILTER";

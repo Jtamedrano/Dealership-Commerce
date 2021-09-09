@@ -1,4 +1,7 @@
 .shop {
+  h2 {
+    text-transform: capitalize;
+  }
   &__search {
     width: 100%;
   }
@@ -58,8 +61,8 @@
 }
 
 .inv-card {
-  border: 1px solid rgb(133, 133, 133);
-  margin: 0.5em;
+  border: 1px solid rgba(196, 196, 196, 0.678);
+  margin: 0.5em 1em;
   &__top {
     display: flex;
   }
