@@ -9,7 +9,7 @@ const MainLayout: React.FC = ({ children }) => {
       <header>
         <NavHeader />
       </header>
-      <Container fluid="lg" className="MainLayout__container">
+      <Container fluid="xxl" className="MainLayout__container">
         <main>{children}</main>
       </Container>
       <footer>

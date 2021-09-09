@@ -1,0 +1,10 @@
+query GetAllAutos {
+  getAllAutos {
+    id
+    createdAt
+    updatedAt
+    year
+    make
+    model
+  }
+}
