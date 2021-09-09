@@ -1,14 +1,15 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import MainLayout from "../components/layouts/MainLayout";
 import { Jumbotron, SquareGrid } from "../components/parts";
 
 const Home: NextPage = () => {
   return (
-    <>
+    <MainLayout>
       <Head>
         <title>Auto Dealer</title>
       </Head>
-      <h1>Auto Dealer</h1>
+      {/* <h1>Auto Dealer</h1> */}
       <div className="Home__jumbotron">
         <Jumbotron />
       </div>
@@ -174,7 +175,7 @@ const Home: NextPage = () => {
           representative!
         </p>
       </div>
-    </>
+    </MainLayout>
   );
 };
 

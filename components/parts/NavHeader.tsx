@@ -1,10 +1,11 @@
+import router from "next/router";
 import React from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 
 const NavHeader = () => {
   return (
     <Navbar bg="light" expand="lg" fixed="top">
-      <Container fluid="lg">
+      <Container fluid="sm">
         <Navbar.Brand href="/">Auto Dealer</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -12,7 +13,13 @@ const NavHeader = () => {
             <Nav.Link href="/">Home</Nav.Link>
             <NavDropdown title="New Inventory" id="new-intentory-dropdown">
               <NavDropdown.Header>SHOP NEW</NavDropdown.Header>
-              <NavDropdown.Item>New Vehicles</NavDropdown.Item>
+              <NavDropdown.Item
+                onClick={() => {
+                  router.push("/shop");
+                }}
+              >
+                New Vehicles
+              </NavDropdown.Item>
               <NavDropdown.Item>New Vehicle Specials</NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Pre-Owned Inventory" id="pre-owned-dropdown">
