@@ -1,5 +1,5 @@
 .shop {
-  h2 {
+  h1 {
     text-transform: capitalize;
   }
   &__search {
@@ -44,6 +44,26 @@
   }
   &__sorter {
     margin-left: 1em;
+  }
+}
+
+.filter {
+  &__number-input {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0.25em;
+  }
+
+  &__year,
+  &__price {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
+
+  &__year > &__number-input,
+  &__price > &__number-input {
+    flex-basis: 45%;
   }
 }
 

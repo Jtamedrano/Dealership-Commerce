@@ -33,7 +33,6 @@ const ShopLayout = (props: Props) => {
       {state && <h1>{getStateName()} Vehicles</h1>}
       <Search className="shop__search" />
       <div className="shop__main">
-        {/* filter */}
         <Filter />
         <div>
           <InventoryView />

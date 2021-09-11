@@ -7,16 +7,18 @@ interface Props {}
 
 const Filter = (props: Props) => {
   return (
-    <div>
+    <div className="filter">
       {/* Year */}
       <FilterCollapse initialState={true} label="Year">
-        <div>
-          <label htmlFor="">Min</label>
-          <input type="number" max="2023" min="1950" />
-        </div>
-        <div>
-          <label htmlFor="">Max</label>
-          <input type="number" max="2023" min="1950" />
+        <div className="filter__year">
+          <div className="filter__number-input">
+            <label htmlFor="">Min</label>
+            <input type="number" max="2023" min="1950" />
+          </div>
+          <div className="filter__number-input">
+            <label htmlFor="">Max</label>
+            <input type="number" max="2023" min="1950" />
+          </div>
         </div>
       </FilterCollapse>
       {/* Make */}
@@ -47,13 +49,15 @@ const Filter = (props: Props) => {
       </FilterCollapse>
       {/* Price */}
       <FilterCollapse initialState={true} label="Price">
-        <div>
-          <label htmlFor="">Min</label>
-          <input type="number" min="0" />
-        </div>
-        <div>
-          <label htmlFor="">Max</label>
-          <input type="number" max="999999999" min="1" />
+        <div className="filter__price">
+          <div className="filter__number-input">
+            <label htmlFor="">Min</label>
+            <input type="number" min={0} max="999999998" />
+          </div>
+          <div className="filter__number-input">
+            <label htmlFor="">Max</label>
+            <input type="number" max="999999999" min={1} />
+          </div>
         </div>
       </FilterCollapse>
       {/* Trim */}

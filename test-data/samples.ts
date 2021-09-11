@@ -205,4 +205,27 @@ export const sample_data_one: Auto[] = [
     img_url:
       "https://cars.usnews.com/static/images/Auto/izmo/i120642170/2019_chevrolet_cruze_angularfront.jpg",
   },
+  {
+    year: 2003,
+    make: "Infiniti",
+    model: "G",
+    trim: "G35",
+    dealer_price: 1550,
+    msrp: 1550,
+    odo: 329428,
+    transmission: "5-Speed Automatic",
+    gas_mileage: {
+      city: 17,
+      hwy: 24,
+      combo: 20,
+    },
+    engine: "260 hp 3.5L V6",
+    drive: "RWD",
+    fuel: "Gasoline",
+    vin: "JNKCV51EX3M315339",
+    condition: "used",
+    body: "sedan",
+    img_url:
+      "https://file.kelleybluebookimages.com/kbb/base/house/2003/2003-Infiniti-G-FrontSide_IFG35031_505x375.jpg?interpolation=high-quality&downsize=600:*",
+  },
 ];

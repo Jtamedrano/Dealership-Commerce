@@ -11,7 +11,7 @@ interface Props {
 
 const Search: React.FC<Props> = ({ className }) => {
   const inventoryCount = useSelector(
-    ({ inventory }: RStore) => inventory.length
+    ({ inventory }: RStore) => inventory.visibleInventory.length
   );
   const parentClass = "search";
   const classes = clsx([parentClass, className]);

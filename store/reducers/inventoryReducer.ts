@@ -23,12 +23,10 @@ export const inventoryReducer = (
         ...action.payload,
       };
 
-      console.log(toBeFiltered);
       for (const key in toBeFiltered) {
         if (Object.prototype.hasOwnProperty.call(toBeFiltered, key)) {
           toBeVisible = toBeVisible.filter((auto) => {
             if (typeof toBeFiltered[key] === "string") {
-              console.log("filter method", key, auto[key], toBeFiltered[key]);
               return auto[key] === toBeFiltered[key];
             }
             return true;

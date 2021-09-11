@@ -6,7 +6,6 @@ interface AdminLayoutProps {
 }
 
 const AdminLayout: React.FC<AdminLayoutProps> = ({ admin }) => {
-  console.log("AdminLayout", admin);
   return (
     <div className="admin">
       <h1>Admin View</h1>
