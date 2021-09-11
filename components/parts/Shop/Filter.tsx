@@ -1,11 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { sample_data_one } from "../../../test-data/samples";
 import { countObjListByKey } from "../../../utils/toCatSet";
+import { toIntPrice } from "../../../utils/toIntPrice";
 import FilterCollapse from "./FilterCollapse";
 
 interface Props {}
 
 const Filter = (props: Props) => {
+  const inventory = useSelector(({ inventory }: RStore) => inventory);
   return (
     <div className="filter">
       {/* Year */}
@@ -52,11 +55,21 @@ const Filter = (props: Props) => {
         <div className="filter__price">
           <div className="filter__number-input">
             <label htmlFor="">Min</label>
-            <input type="number" min={0} max="999999998" />
+            <input
+              type="number"
+              max={inventory.maxPrice - 1}
+              min={inventory.minPrice}
+            />
+            <small>Min: ${toIntPrice(inventory.minPrice)}</small>
           </div>
           <div className="filter__number-input">
             <label htmlFor="">Max</label>
-            <input type="number" max="999999999" min={1} />
+            <input
+              type="number"
+              max={inventory.maxPrice}
+              min={inventory.minPrice + 1}
+            />
+            <small>Max: ${toIntPrice(inventory.maxPrice)}</small>
           </div>
         </div>
       </FilterCollapse>

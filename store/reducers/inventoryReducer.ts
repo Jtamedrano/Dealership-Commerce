@@ -1,9 +1,12 @@
 import { sample_data_one } from "../../test-data/samples";
+import { getMinMax } from "../../utils/getSetsPrices";
 
 const initialState: RInventoryStore = {
   rootInventory: sample_data_one,
   visibleInventory: sample_data_one,
   filters: {},
+  minPrice: 0,
+  maxPrice: 1,
 };
 
 export const inventoryReducer = (
@@ -33,7 +36,16 @@ export const inventoryReducer = (
           });
         }
       }
-      return { ...state, visibleInventory: toBeVisible, filters: toBeFiltered };
+
+      const minMax = getMinMax(toBeVisible);
+
+      return {
+        ...state,
+        visibleInventory: toBeVisible,
+        filters: toBeFiltered,
+        maxPrice: minMax[1],
+        minPrice: minMax[0],
+      };
     default:
       return state;
   }
