@@ -1,15 +1,22 @@
-const getMinMax = (set: Auto[]): [number, number] => {
+const getMinMax = (
+  set: Auto[],
+  filterType: "year" | "msrp"
+): [number, number] => {
   if (!set) {
     return [0, 0];
   }
-  const price: [number, number] = [set[0].msrp, set[0].msrp];
+  if (!set[0]) {
+    return [0, 0];
+  }
+
+  const comp: [number, number] = [set[0][filterType], set[0][filterType]];
 
   const compare = (item: Auto) => {
-    if (item.msrp < price[0]) {
-      price[0] = item.msrp;
+    if (item[filterType] < comp[0]) {
+      comp[0] = item[filterType];
     }
-    if (item.msrp > price[1]) {
-      price[1] = item.msrp;
+    if (item[filterType] > comp[1]) {
+      comp[1] = item[filterType];
     }
   };
 
@@ -31,7 +38,7 @@ const getMinMax = (set: Auto[]): [number, number] => {
     }
   }
 
-  return price;
+  return comp;
 };
 
 export { getMinMax };

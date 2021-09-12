@@ -1,4 +1,8 @@
-export const toIntPrice = (n: number): string => {
+export const toIntPrice = (n: number | undefined): string => {
+  if (!n) {
+    return "0";
+  }
+
   const intToString = String(n);
 
   let retString = "";

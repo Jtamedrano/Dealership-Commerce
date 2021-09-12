@@ -50,8 +50,10 @@ declare type RInventoryStore = {
   rootInventory: Auto[];
   visibleInventory: Auto[];
   filters: filters;
-  minPrice: number;
-  maxPrice: number;
+  minPrice: number | undefined;
+  maxPrice: number | undefined;
+  minYear: number | undefined;
+  maxYear: number | undefined;
 };
 
 declare type RAction<T> = {
