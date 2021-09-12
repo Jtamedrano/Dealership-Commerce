@@ -17,7 +17,6 @@ const Year: React.FC = () => {
     }
   };
   const handleOnBlur = () => {
-    console.log("blurred");
     dispatch({ type: "ADD_FILTER", payload: { year: value } });
   };
 

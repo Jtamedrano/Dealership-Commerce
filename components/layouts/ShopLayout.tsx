@@ -20,11 +20,11 @@ const ShopLayout = (props: Props) => {
   }, []);
 
   const getStateName = () => {
-    if (!!state && state[0].length > 1) {
+    if ((!!state && state.length > 1) || !state) {
       return "All";
     }
 
-    return state;
+    return state[0];
   };
 
   return (

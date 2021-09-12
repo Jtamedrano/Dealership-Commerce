@@ -22,7 +22,7 @@ const NavHeader = () => {
                 onClick={() => {
                   dispatch({
                     type: "ADD_FILTER",
-                    payload: { condition: "new" },
+                    payload: { condition: ["new"] },
                   });
                   router.push("/shop");
                 }}
@@ -37,7 +37,7 @@ const NavHeader = () => {
                 onClick={() => {
                   dispatch({
                     type: "ADD_FILTER",
-                    payload: { condition: "used" },
+                    payload: { condition: ["used"] },
                   });
                   router.push("/shop");
                 }}
