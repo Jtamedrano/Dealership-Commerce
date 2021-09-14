@@ -2,6 +2,7 @@ import React, { ChangeEvent, InputHTMLAttributes } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { countObjListByKey } from "../../../utils/toCatSet";
 import { toIntPrice } from "../../../utils/toIntPrice";
+import { wordSorterAid } from "../../../utils/wordSort";
 import FilterCollapse from "./FilterCollapse";
 import { Year } from "./filters";
 
@@ -14,8 +15,8 @@ type CheckboxProp = InputHTMLAttributes<HTMLInputElement> & {
 
 const FilterCheckbox: React.FC<CheckboxProp> = ({ item, count, ...rest }) => (
   <div>
-    <input {...rest} type="checkbox" />{" "}
-    <label>
+    <input {...rest} type="checkbox" id={`check-item-${item}`} />{" "}
+    <label htmlFor={`check-item-${item}`}>
       {item} ({count})
     </label>
   </div>
@@ -36,6 +37,7 @@ const Filter = (props: Props) => {
     });
   };
   const onchangeAdd = (key: keyof filters, item: string) => {
+    console.log(filters);
     const ammendArray = filters[key] as string[];
     ammendArray.push(item);
     dispatch({
@@ -55,31 +57,37 @@ const Filter = (props: Props) => {
       {/* Make */}
       <FilterCollapse initialState={true} label="Make">
         <div>
-          {makes.selected.map(({ item, count }, i) => (
-            <FilterCheckbox
-              key={"make-filter-selected" + i + 1}
-              item={item}
-              count={count}
-              checked
-              onChange={(e) => onchangeRemove("make", item)}
-            />
-          ))}
-          {makes.notSelected.map(({ item }, i) => (
-            <FilterCheckbox
-              key={"make-filter-not-selected" + i + 1}
-              item={item}
-              count={0}
-              onChange={(e) => onchangeAdd("make", item)}
-            />
-          ))}
-          {makes.unavailable.map(({ item }, i) => (
-            <FilterCheckbox
-              key={"make-filter-not-selected" + i + 1}
-              item={item}
-              count={0}
-              disabled
-            />
-          ))}
+          {makes.selected
+            .sort((a, b) => wordSorterAid(a.item, b.item))
+            .map(({ item, count }, i) => (
+              <FilterCheckbox
+                key={"make-filter-selected" + i + 1}
+                item={item}
+                count={count}
+                checked
+                onChange={(e) => onchangeRemove("make", item)}
+              />
+            ))}
+          {makes.notSelected
+            .sort((a, b) => wordSorterAid(a.item, b.item))
+            .map(({ item }, i) => (
+              <FilterCheckbox
+                key={"make-filter-not-selected" + i + 1}
+                item={item}
+                count={0}
+                onChange={(e) => onchangeAdd("make", item)}
+              />
+            ))}
+          {makes.unavailable
+            .sort((a, b) => wordSorterAid(a.item, b.item))
+            .map(({ item }, i) => (
+              <FilterCheckbox
+                key={"make-filter-not-selected" + i + 1}
+                item={item}
+                count={0}
+                disabled
+              />
+            ))}
         </div>
       </FilterCollapse>
       {/* Model */}
