@@ -14,7 +14,6 @@ const InputField: React.FC<InputFieldProps> = ({
   ...props
 }) => {
   const [field, { error }] = useField(props);
-  console.log("Error Message - Input Field: ", error);
   return (
     <Form.Group
       className={`admin__login-input${className ? ` ${className}` : ""}`}

@@ -7,7 +7,6 @@ interface Props {}
 
 const shop = (props: Props) => {
   const state = useSelector((store: RStore) => store);
-  console.log(state);
   return (
     <MainLayout>
       <ShopLayout />

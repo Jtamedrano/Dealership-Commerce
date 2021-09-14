@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Filter, InventoryView, Search } from "../parts/Shop";
+import ViewSelector from "../parts/Shop/ViewSelector";
 
 interface Props {}
 
@@ -20,20 +21,22 @@ const ShopLayout = (props: Props) => {
   }, []);
 
   const getStateName = () => {
-    if (!!state && state[0].length > 1) {
+    if ((!!state && state.length > 1) || !state) {
       return "All";
     }
 
-    return state;
+    return state[0];
   };
 
   return (
     <div className="shop">
       <title>Shop {getStateName()} Vehicles - Auto Dealer</title>
-      {state && <h1>{getStateName()} Vehicles</h1>}
+      <div className="shop__header">
+        {state && <h1>{getStateName()} Vehicles</h1>}
+        <ViewSelector />
+      </div>
       <Search className="shop__search" />
       <div className="shop__main">
-        {/* filter */}
         <Filter />
         <div>
           <InventoryView />

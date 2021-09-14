@@ -18,7 +18,7 @@ declare type Auto = {
   vin: string;
   condition: string;
   img_url: string;
-  [key: string]: any;
+  [key: string]: string | number;
 };
 
 declare type filters = {
@@ -30,26 +30,35 @@ declare type filters = {
   msrp?: [number, number];
   odo?: [number, number];
   transmission?: string[];
-  gas_mileage?: {
-    city?: [number, number];
-    hwy?: [number, number];
-    combo?: [number, number];
-  };
-  engine?: string[];
   drive?: string[];
   fuel?: string[];
-  condition?: "new" | "used" | "salvaged";
-  [key: string]: any;
+  condition?: string[];
+  [key: string]: string[] | [number, number];
 };
 
 declare type RStore = {
   inventory: RInventoryStore;
 };
 
+type selectCount = { item: string; count: number }[];
+
 declare type RInventoryStore = {
   rootInventory: Auto[];
   visibleInventory: Auto[];
   filters: filters;
+  minPrice: number | undefined;
+  maxPrice: number | undefined;
+  minYear: number | undefined;
+  maxYear: number | undefined;
+  makes: {
+    selected: selectCount;
+    notSelected: selectCount;
+    unavailable: selectCount;
+  };
+  models: {
+    selected: selectCount;
+    notSelected: selectCount;
+  };
 };
 
 declare type RAction<T> = {
@@ -57,4 +66,4 @@ declare type RAction<T> = {
   payload?: any;
 };
 
-declare type RInventoryTypes = "ADD_FILTER";
+declare type RInventoryTypes = "ADD_FILTER" | "CHANGE_FILTER_VIEW";
