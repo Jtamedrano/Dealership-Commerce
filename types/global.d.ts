@@ -66,4 +66,4 @@ declare type RAction<T> = {
   payload?: any;
 };
 
-declare type RInventoryTypes = "ADD_FILTER";
+declare type RInventoryTypes = "ADD_FILTER" | "CHANGE_FILTER_VIEW";

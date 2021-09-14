@@ -36,8 +36,12 @@ const Filter = (props: Props) => {
       },
     });
   };
-  const onchangeAdd = (key: keyof filters, item: string) => {
-    console.log(filters);
+  const onchangeAdd = (
+    key: keyof filters,
+    item: string,
+    e: ChangeEvent<HTMLInputElement>
+  ) => {
+    e.stopPropagation();
     const ammendArray = filters[key] as string[];
     ammendArray.push(item);
     dispatch({
@@ -64,8 +68,9 @@ const Filter = (props: Props) => {
                 key={"make-filter-selected" + i + 1}
                 item={item}
                 count={count}
-                checked
-                onChange={(e) => onchangeRemove("make", item)}
+                name={item}
+                checked={!!makes.selected.find((auto) => auto.item === item)}
+                onChange={() => onchangeRemove("make", item)}
               />
             ))}
           {makes.notSelected
@@ -75,7 +80,8 @@ const Filter = (props: Props) => {
                 key={"make-filter-not-selected" + i + 1}
                 item={item}
                 count={0}
-                onChange={(e) => onchangeAdd("make", item)}
+                checked={!!makes.selected.find((auto) => auto.item === item)}
+                onChange={(e) => onchangeAdd("make", item, e)}
               />
             ))}
           {makes.unavailable
