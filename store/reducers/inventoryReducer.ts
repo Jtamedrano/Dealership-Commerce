@@ -27,6 +27,16 @@ export const inventoryReducer = (
   state = initialState,
   action: RAction<RInventoryTypes>
 ): RInventoryStore => {
+  // Utility function for condition filter
+  const conditionMatch = (auto: Auto): boolean => {
+    if (state.filters.condition) {
+      return !state.filters.condition.includes(auto.condition);
+    } else if (action.payload.condition) {
+      return !action.payload.condition.includes(auto.condition);
+    }
+    return true;
+  };
+
   switch (action.type) {
     case "ADD_FILTER":
       if (!action.payload) {
@@ -36,20 +46,12 @@ export const inventoryReducer = (
       let toBeVisible: Auto[] = [];
       let toBeHidden: Auto[] = [];
 
-      const unavailable = state.rootInventory.filter((auto) => {
-        if (state.filters.condition) {
-          return !state.filters.condition.includes(auto.condition);
-        } else if (action.payload.condition) {
-          return !action.payload.condition.includes(auto.condition);
-        }
-      });
-      const available = state.rootInventory.filter((auto) => {
-        if (state.filters.condition) {
-          return state.filters.condition.includes(auto.condition);
-        } else if (action.payload.condition) {
-          return action.payload.condition.includes(auto.condition);
-        }
-      });
+      const unavailable = state.rootInventory.filter((auto) =>
+        conditionMatch(auto)
+      );
+      const available = state.rootInventory.filter((auto) =>
+        conditionMatch(auto)
+      );
 
       const toBeFiltered: filters = {
         ...state.filters,
@@ -68,15 +70,16 @@ export const inventoryReducer = (
               }
             }
 
+            const hideNums = (index: number): void => {
+              if (element[index] !== undefined && auto[key] < element[index]) {
+                toBeHidden.push(auto);
+                return;
+              }
+            };
+
             if (typeof auto[key] === "number") {
-              if (element[0] !== undefined && auto[key] < element[0]) {
-                toBeHidden.push(auto);
-                return;
-              }
-              if (element[1] !== undefined && auto[key] > element[1]) {
-                toBeHidden.push(auto);
-                return;
-              }
+              hideNums(0);
+              hideNums(1);
             }
           }
         }
