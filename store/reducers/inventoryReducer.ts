@@ -36,7 +36,6 @@ export const inventoryReducer = (
       let toBeVisible: Auto[] = [];
       let toBeHidden: Auto[] = [];
 
-      console.log(action.payload);
       const unavailable = state.rootInventory.filter((auto) => {
         if (state.filters.condition) {
           return !state.filters.condition.includes(auto.condition);

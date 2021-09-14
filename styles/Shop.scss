@@ -9,6 +9,25 @@
     display: grid;
     grid-template-columns: 20% 80%;
   }
+  &__header,
+  &__selector {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+  }
+
+  &__header {
+    align-items: flex-end;
+    width: 100%;
+  }
+
+  &__selector {
+    align-items: center;
+
+    &-item {
+      margin-left: 1em;
+    }
+  }
 }
 
 .search {
