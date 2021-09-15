@@ -1,4 +1,6 @@
+import clsx from "clsx";
 import React from "react";
+import { Auto } from "../../../store/reducers/Auto";
 import { toIntPrice } from "../../../utils/toIntPrice";
 
 interface Props {
@@ -6,57 +8,40 @@ interface Props {
 }
 
 const InventoryCard: React.FC<Props> = ({ auto }) => {
-  const {
-    year,
-    make,
-    model,
-    trim,
-    gas_mileage,
-    engine,
-    transmission,
-    drive,
-    msrp,
-    img_url,
-    odo,
-  } = auto;
+  console.log(auto);
+
+  const { year, make, model, trim, msrp, img_url, odo } = auto.auto;
 
   return (
-    <div className="inv-card">
-      <div className="inv-card__top">
-        <div className="inv-card__img-container">
-          <img src={img_url} alt={`${year} ${make} ${model} ${trim}`} />
+    <div className="max-w-sm mx-auto w-full bg-white rounded-lg transition-shadow duration-500 ease-in-out shadow-md hover:shadow-lg overflow-hidden">
+      <div className="grid grid-rows-card-layout h-full">
+        <div className="w-full overflow-hidden">
+          <img
+            className="h-full w-full object-cover"
+            src={img_url}
+            alt={`${year} ${make} ${model} ${trim}`}
+            height="100%"
+            width="100%"
+          />
         </div>
-        <div className="inv-card__details">
-          <div className="product-name">
-            <p>
+        <div className="grid grid-cols-3 gap-2 place-content-center px-6 py-2">
+          <div className="font-bold text-lg max-h-full col-span-2">
+            <p className="text-xl">
               {year} {make}
             </p>
-            <p>
-              {model} {trim}
-            </p>
+            <p>{model}</p>
           </div>
-          <div className="product-details">
-            <div className="product-details__summary">
-              <p>{toIntPrice(odo)} Miles</p>
-              <p>
-                {gas_mileage.city}/{gas_mileage.hwy} mpg City/Hwy
-              </p>
-              <p>{engine} Engine</p>
-              <p>{transmission}</p>
-              <p>{drive}</p>
-            </div>
-            <div className="product-details__pricing">
-              <div>
-                <p>MSRP</p>
-                <p>
-                  <strong>${toIntPrice(msrp)}</strong>
-                </p>
-              </div>
-            </div>
+          <div className="font-semibold text-2xl text-right">
+            <p>${toIntPrice(msrp)}</p>
+          </div>
+          <div className="col-span-2">
+            <p>{trim}</p>
+          </div>
+          <div className="text-right">
+            <p>{toIntPrice(odo)} miles</p>
           </div>
         </div>
       </div>
-      <div className="inv-card__bottom"></div>
     </div>
   );
 };

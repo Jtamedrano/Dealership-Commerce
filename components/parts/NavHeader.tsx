@@ -1,56 +1,32 @@
 import router from "next/router";
+import Link from "next/link";
 import React from "react";
-import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
 
 const NavHeader = () => {
   const dispatch = useDispatch();
+  const goToShop = () => {
+    dispatch({
+      type: "ADD_FILTER",
+      payload: { condition: ["new"] },
+    });
+    router.push("/shop");
+  };
   return (
     <Navbar expand="lg" fixed="top">
       <Container fluid="sm">
-        <Navbar.Brand href="/" className="AutoBrand">
-          Auto Dealer
-        </Navbar.Brand>
+        <Link href="/">
+          <Navbar.Brand className="AutoBrand">Auto Dealer</Navbar.Brand>
+        </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav>
-            <Nav.Link href="/">Home</Nav.Link>
-            <NavDropdown title="New Inventory" id="new-intentory-dropdown">
-              <NavDropdown.Header>SHOP NEW</NavDropdown.Header>
-              <NavDropdown.Item
-                onClick={() => {
-                  dispatch({
-                    type: "ADD_FILTER",
-                    payload: { condition: ["new"] },
-                  });
-                  router.push("/shop");
-                }}
-              >
-                New Vehicles
-              </NavDropdown.Item>
-              <NavDropdown.Item>New Vehicle Specials</NavDropdown.Item>
-            </NavDropdown>
-            <NavDropdown title="Pre-Owned Inventory" id="pre-owned-dropdown">
-              <NavDropdown.Header>SHOP PRE-OWNED</NavDropdown.Header>
-              <NavDropdown.Item
-                onClick={() => {
-                  dispatch({
-                    type: "ADD_FILTER",
-                    payload: { condition: ["used"] },
-                  });
-                  router.push("/shop");
-                }}
-              >
-                Pre-Owned Vehicles
-              </NavDropdown.Item>
-              <NavDropdown.Item>Certified Pre-Owned Vehicle</NavDropdown.Item>
-            </NavDropdown>
-            <NavDropdown title="Service & Parts" id="service-dropdown">
-              <NavDropdown.Header>SERVICE</NavDropdown.Header>
-              <NavDropdown.Item>Schedule Service</NavDropdown.Item>
-              <NavDropdown.Item>Service Center</NavDropdown.Item>
-            </NavDropdown>
+            <Link href="/">
+              <Nav.Item>Home</Nav.Item>
+            </Link>
+            <Nav.Item onClick={goToShop}>Shop Cars</Nav.Item>
           </Nav>
         </Navbar.Collapse>
       </Container>

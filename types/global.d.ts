@@ -1,4 +1,4 @@
-declare type Auto = {
+declare type IAuto = {
   year: number;
   make: string;
   model: string;
@@ -42,28 +42,17 @@ declare type RStore = {
 
 type selectCount = { item: string; count: number }[];
 
+interface CAuto {
+  auto: IAuto;
+  is: (key: keyof IAuto, data: IAuto[keyof IAuto]) => boolean;
+}
+
 declare type RInventoryStore = {
-  rootInventory: Auto[];
-  visibleInventory: Auto[];
+  rootInventory: CAuto[];
   filters: filters;
-  minPrice: number | undefined;
-  maxPrice: number | undefined;
-  minYear: number | undefined;
-  maxYear: number | undefined;
-  makes: {
-    selected: selectCount;
-    notSelected: selectCount;
-    unavailable: selectCount;
-  };
-  models: {
-    selected: selectCount;
-    notSelected: selectCount;
-  };
 };
 
 declare type RAction<T> = {
   type: T;
   payload?: any;
 };
-
-declare type RInventoryTypes = "ADD_FILTER" | "CHANGE_FILTER_VIEW";

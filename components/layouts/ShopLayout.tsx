@@ -6,9 +6,7 @@ import ViewSelector from "../parts/Shop/ViewSelector";
 interface Props {}
 
 const ShopLayout = (props: Props) => {
-  const state = useSelector(
-    (state: RStore) => state.inventory.filters.condition
-  );
+  const state = useSelector((state: RStore) => state.inventory);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,24 +18,12 @@ const ShopLayout = (props: Props) => {
     }
   }, []);
 
-  const getStateName = () => {
-    if ((!!state && state.length > 1) || !state) {
-      return "All";
-    }
-
-    return state[0];
-  };
-
   return (
     <div className="shop">
-      <title>Shop {getStateName()} Vehicles - Auto Dealer</title>
-      <div className="shop__header">
-        {state && <h1>{getStateName()} Vehicles</h1>}
-        <ViewSelector />
-      </div>
+      <div className="shop__header">{/* <ViewSelector /> */}</div>
       <Search className="shop__search" />
       <div className="shop__main">
-        <Filter />
+        {/* <Filter /> */}
         <div>
           <InventoryView />
         </div>

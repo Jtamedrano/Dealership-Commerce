@@ -1,9 +1,11 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import "bootstrap/dist/css/bootstrap.css";
-import "../styles/index.scss";
 import { createClient, Provider } from "urql";
 import { ReduxProvider } from "../store";
+import "tailwindcss/tailwind.css";
+import "../styles/globals.css";
+import "../styles/index.scss";
 
 const client = createClient({
   url: "http://localhost:4000/graphql",
