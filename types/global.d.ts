@@ -7,17 +7,14 @@ declare type IAuto = {
   msrp: number;
   odo: number;
   transmission: string;
-  gas_mileage: {
-    city: number;
-    hwy: number;
-    combo: number;
-  };
   engine: string;
   drive: string;
   fuel: string;
   vin: string;
   condition: string;
   img_url: string;
+  body: string;
+  color: string;
   [key: string]: string | number;
 };
 
@@ -43,13 +40,25 @@ declare type RStore = {
 type selectCount = { item: string; count: number }[];
 
 interface CAuto {
-  auto: IAuto;
-  is: (key: keyof IAuto, data: IAuto[keyof IAuto]) => boolean;
+  odo: number;
+  inventory_details: {
+    msrp: number;
+    condition: string;
+    published: boolean;
+    image: string;
+  };
+  manufacture_details: {
+    year: number;
+    make: string;
+    model: string;
+    trim: string;
+  };
+  isForSale: () => boolean;
 }
 
 declare type RInventoryStore = {
-  rootInventory: CAuto[];
   filters: filters;
+  sort_option: number;
 };
 
 declare type RAction<T> = {

@@ -1,53 +1,50 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { ChangeEvent } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import SearchIcon from "@material-ui/icons/Search";
 import ListIcon from "@material-ui/icons/List";
 import ViewStreamIcon from "@material-ui/icons/ViewStream";
 import clsx from "clsx";
+import { RootState } from "../../../store";
+import { sort } from "../../../store/reducers/inventoryReducer";
+import SortSelector from "./SortDropdown";
 
 interface Props {
   className: string;
 }
 
+const SearchBar: React.FC = () => {
+  return (
+    <div className="flex justify-between px-4 py-2 border-2 bg-blue-50 focus-within::bg-white">
+      <input className="bg-blue-50" placeholder="Search out inventory..." />
+      <SearchIcon />
+    </div>
+  );
+};
+
 const Search: React.FC<Props> = ({ className }) => {
   const inventoryCount = useSelector(
-    ({ inventory }: RStore) => inventory.rootInventory.length
+    ({ inventory }: RootState) => inventory.rootInventory.length
   );
   const parentClass = "search";
   const classes = clsx([parentClass, className]);
   return (
-    <div className={classes}>
+    <div className="w-full border-b-2 py-2 flex-col">
       {/* Search Bar */}
-      <div className={`${parentClass}__searchBar`}>
-        <input placeholder="Search out inventory..." />
-        <SearchIcon />
-      </div>
-      <div className={`${parentClass}__filter-details`}>
+      {/* <SearchBar /> */}
+      {/* Filter Button Menus */}
+
+      <div className="flex justify-between">
         {/* Number of Vehicles */}
         <div className={`${parentClass}__vehicle-count`}>
           <p>{inventoryCount} Vehicles</p>
         </div>
         {/* View Type */}
         <div className={`${parentClass}__filter-options`}>
-          <div>
+          {/* <div>
             <ListIcon /> | <ViewStreamIcon />
-          </div>
+          </div> */}
           {/* Sort by */}
-          <div className={`${parentClass}__sorter`}>
-            <select name="filter-selector" id="filter-selector">
-              <option value="0">Sort by</option>
-              <option value="1">Year: Old to New</option>
-              <option value="2">Year: New to Old</option>
-              <option value="3">Body Style: A to Z</option>
-              <option value="4">Body Style: Z to A</option>
-              <option value="5">Color: A to Z</option>
-              <option value="6">Color: Z to A</option>
-              <option value="7">Mileage: Low to High</option>
-              <option value="8">Mileage: High to Low</option>
-              <option value="9">Price: Low to High</option>
-              <option value="10">Price: High to Low</option>
-            </select>
-          </div>
+          <SortSelector />
         </div>
       </div>
     </div>

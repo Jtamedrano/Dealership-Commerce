@@ -30,42 +30,6 @@
   }
 }
 
-.search {
-  &__searchBar,
-  &__filter-details {
-    display: flex;
-    justify-content: space-between;
-  }
-  &__searchBar {
-    border: 1px solid rgb(133, 133, 133);
-    padding: 0.5em 1em;
-    margin-bottom: 0.5em;
-
-    input {
-      border: none;
-      &:focus,
-      &:active {
-        border: none;
-        outline: none;
-      }
-    }
-  }
-
-  &__vehicle-count {
-    display: flex;
-    align-items: center;
-    p {
-      margin: 0;
-    }
-  }
-  &__filter-options {
-    display: flex;
-  }
-  &__sorter {
-    margin-left: 1em;
-  }
-}
-
 .filter {
   &__number-input {
     display: flex;

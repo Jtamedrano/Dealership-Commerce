@@ -1,25 +1,21 @@
-import clsx from "clsx";
 import React from "react";
-import { Auto } from "../../../store/reducers/Auto";
 import { toIntPrice } from "../../../utils/toIntPrice";
 
 interface Props {
-  auto: Auto;
+  auto: IAuto;
 }
 
 const InventoryCard: React.FC<Props> = ({ auto }) => {
-  console.log(auto);
-
-  const { year, make, model, trim, msrp, img_url, odo } = auto.auto;
+  const { year, make, model, msrp, trim, img_url } = auto;
 
   return (
     <div className="max-w-sm mx-auto w-full bg-white rounded-lg transition-shadow duration-500 ease-in-out shadow-md hover:shadow-lg overflow-hidden">
       <div className="grid grid-rows-card-layout h-full">
-        <div className="w-full overflow-hidden">
+        <div className="w-full overflow-hidden border-b-4">
           <img
             className="h-full w-full object-cover"
             src={img_url}
-            alt={`${year} ${make} ${model} ${trim}`}
+            alt={`${year} ${make} ${model}`}
             height="100%"
             width="100%"
           />
@@ -38,7 +34,7 @@ const InventoryCard: React.FC<Props> = ({ auto }) => {
             <p>{trim}</p>
           </div>
           <div className="text-right">
-            <p>{toIntPrice(odo)} miles</p>
+            <p>{toIntPrice(auto.odo)} miles</p>
           </div>
         </div>
       </div>

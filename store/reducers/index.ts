@@ -1,5 +1,5 @@
-import { combineReducers } from "redux";
-import { inventoryReducer } from "./inventoryReducer";
+import { combineReducers } from "@reduxjs/toolkit";
+import inventoryReducer from "./inventoryReducer";
 
 const allReducers = combineReducers({ inventory: inventoryReducer });
 
