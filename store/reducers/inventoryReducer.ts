@@ -9,6 +9,7 @@ const initialState = {
   list: sample_data_one,
   filters: {},
   sort_option: 0,
+  inventory_page: 1,
 };
 
 export const inventoryRed = createSlice({
@@ -76,8 +77,11 @@ export const inventoryRed = createSlice({
         return state;
       }
     },
+    changePage: (state, action) => {
+      state.inventory_page = action.payload;
+    },
   },
 });
 
-export const { init, sort } = inventoryRed.actions;
+export const { init, sort, changePage } = inventoryRed.actions;
 export default inventoryRed.reducer;
