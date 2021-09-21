@@ -7,6 +7,7 @@ import clsx from "clsx";
 import { RootState } from "../../../store";
 import { sort } from "../../../store/reducers/inventoryReducer";
 import SortSelector from "./SortDropdown";
+import { Filter } from ".";
 
 interface Props {
   className: string;
@@ -32,7 +33,7 @@ const Search: React.FC<Props> = ({ className }) => {
       {/* Search Bar */}
       {/* <SearchBar /> */}
       {/* Filter Button Menus */}
-
+      <Filter />
       <div className="flex justify-between">
         {/* Number of Vehicles */}
         <div className={`${parentClass}__vehicle-count`}>

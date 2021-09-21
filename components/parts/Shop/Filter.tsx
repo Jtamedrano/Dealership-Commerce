@@ -1,177 +1,123 @@
-import React, { ChangeEvent, InputHTMLAttributes } from "react";
+import { Menu, Transition } from "@headlessui/react";
+import { Slider } from "@material-ui/core";
+import { ArrowDropDown } from "@material-ui/icons";
+import React, {
+  ChangeEvent,
+  Fragment,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
+import NumberFormat from "react-number-format";
+import { RootState } from "../../../store";
+import { getMinMax } from "../../../utils/getMinMax";
 import { countObjListByKey } from "../../../utils/toCatSet";
 import { toIntPrice } from "../../../utils/toIntPrice";
 import { wordSorterAid } from "../../../utils/wordSort";
-import FilterCollapse from "./FilterCollapse";
 import { Year } from "./filters";
 
 interface Props {}
 
-type CheckboxProp = InputHTMLAttributes<HTMLInputElement> & {
-  item: keyof Auto;
-  count: number;
-};
-
-const FilterCheckbox: React.FC<CheckboxProp> = ({ item, count, ...rest }) => (
-  <div>
-    <input {...rest} type="checkbox" id={`check-item-${item}`} />{" "}
-    <label htmlFor={`check-item-${item}`}>
-      {item} ({count})
-    </label>
-  </div>
-);
-
 const Filter = (props: Props) => {
-  const { visibleInventory, makes, maxPrice, minPrice, models, filters } =
-    useSelector(({ inventory }: RStore) => inventory);
-  const dispatch = useDispatch();
+  const state = useSelector(
+    (state: RootState) => state.inventory.rootInventory
+  );
+  const initialState = getMinMax(state, "msrp");
+  const [value, setValue] = useState<number[] | [number, number]>(
+    () => initialState
+  );
 
-  const onchangeRemove = (key: keyof filters, element: string) => {
-    const ammendArray = filters[key] as string[];
-    dispatch({
-      type: "ADD_FILTER",
-      payload: {
-        [key]: ammendArray.filter((item: string) => item !== element),
-      },
-    });
+  const handleChange = (e: any, v: number | number[]) => {
+    if (typeof v === "object") {
+      setValue(v.map((n: number) => n * 1000));
+    }
   };
-  const onchangeAdd = (
-    key: keyof filters,
-    item: string,
-    e: ChangeEvent<HTMLInputElement>
-  ) => {
-    e.stopPropagation();
-    const ammendArray = filters[key] as string[];
-    ammendArray.push(item);
-    dispatch({
-      type: "ADD_FILTER",
-      payload: {
-        [key]: ammendArray,
-      },
-    });
-  };
-
-  console.log(makes);
-
   return (
-    <div className="filter">
-      {/* Year */}
-      <Year />
-      {/* Make */}
-      <FilterCollapse initialState={true} label="Make">
-        <div>
-          {makes.selected
-            .sort((a, b) => wordSorterAid(a.item, b.item))
-            .map(({ item, count }, i) => (
-              <FilterCheckbox
-                key={"make-filter-selected" + i + 1}
-                item={item}
-                count={count}
-                name={item}
-                checked={!!makes.selected.find((auto) => auto.item === item)}
-                onChange={() => onchangeRemove("make", item)}
-              />
-            ))}
-          {makes.notSelected
-            .sort((a, b) => wordSorterAid(a.item, b.item))
-            .map(({ item }, i) => (
-              <FilterCheckbox
-                key={"make-filter-not-selected" + i + 1}
-                item={item}
-                count={0}
-                checked={!!makes.selected.find((auto) => auto.item === item)}
-                onChange={(e) => onchangeAdd("make", item, e)}
-              />
-            ))}
-          {makes.unavailable
-            .sort((a, b) => wordSorterAid(a.item, b.item))
-            .map(({ item }, i) => (
-              <FilterCheckbox
-                key={"make-filter-not-selected" + i + 1}
-                item={item}
-                count={0}
-                disabled
-              />
-            ))}
-        </div>
-      </FilterCollapse>
-      {/* Model */}
-      <FilterCollapse initialState={true} label="Model">
-        <div>
-          {countObjListByKey(visibleInventory, "model").map((year, i) => (
-            <div key={"model-filter-" + i + 1}>
-              <input type="checkbox" />{" "}
-              <label>
-                {year[0]} ({year[1]})
-              </label>
+    <Menu as="div" className="relative">
+      <div className="flex gap-4 mb-3">
+        {/* Filter Button Dropdown */}
+        <Menu.Button className="inline-flex justify-center w-full rounded-sm border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
+          PRICE <ArrowDropDown aria-hidden="true" />
+        </Menu.Button>
+      </div>
+
+      <Transition
+        as={Fragment}
+        enter="transition ease-out duration-100"
+        enterFrom="transform opacity-0 scale-95"
+        enterTo="transform opacity-100 scale-100"
+        leave="transition ease-in duration-75"
+        leaveFrom="transform opacity-100 scale-100"
+        leaveTo="transform opacity-0 scale-95"
+      >
+        <Menu.Items className="absolute w-full z-10 bg-white">
+          <div className="px-4 py-2 border border-gray-400">
+            <div className="px-2 pb-1">
+              <h2 className="font-semibold text-2xl">Price</h2>
             </div>
-          ))}
-        </div>
-      </FilterCollapse>
-      {/* Price */}
-      <FilterCollapse initialState={true} label="Price">
-        <div className="filter__price">
-          <div className="filter__number-input">
-            <label htmlFor="">Min</label>
-            <input
-              type="number"
-              max={maxPrice ? maxPrice - 1 : undefined}
-              min={minPrice}
-            />
-            <small>Min: ${toIntPrice(minPrice)}</small>
+            <hr />
+            <div className="px-2 pt-2">
+              <div className="flex justify-between items-center">
+                <p>PRICE RANGE</p>
+                <div className="flex">
+                  <NumberFormat
+                    value={value[0]}
+                    displayType="text"
+                    thousandSeparator
+                    renderText={(formVal) => (
+                      <div className="border-2 px-2 py-1 rounded-md">
+                        <span>$</span>
+                        <input
+                          className="w-20 focus:outline-none"
+                          value={formVal}
+                          onChange={(e) =>
+                            setValue([
+                              parseInt(e.target.value.replaceAll(",", "")),
+                              value[1],
+                            ])
+                          }
+                        />
+                      </div>
+                    )}
+                  />
+                  <span className="mx-2">&#8212;</span>
+                  <NumberFormat
+                    value={value[1]}
+                    displayType="text"
+                    thousandSeparator
+                    renderText={(formVal) => (
+                      <div className="border-2 px-2 py-1 rounded-md">
+                        <span>$</span>
+                        <input
+                          className="w-20 focus:outline-none"
+                          value={formVal}
+                          max="125000"
+                          onChange={(e) =>
+                            setValue([
+                              value[0],
+                              parseInt(e.target.value.replaceAll(",", "")),
+                            ])
+                          }
+                        />
+                      </div>
+                    )}
+                  />
+                </div>
+              </div>
+              <Slider
+                min={0}
+                max={125}
+                step={0.5}
+                valueLabelDisplay="auto"
+                value={value.map((val) => val * 0.001)}
+                onChange={handleChange}
+              />
+            </div>
           </div>
-          <div className="filter__number-input">
-            <label htmlFor="">Max</label>
-            <input
-              type="number"
-              max={maxPrice}
-              min={minPrice ? minPrice + 1 : undefined}
-            />
-            <small>Max: ${toIntPrice(maxPrice)}</small>
-          </div>
-        </div>
-      </FilterCollapse>
-      {/* Trim */}
-      <FilterCollapse initialState={true} label="Trim">
-        <div>
-          {countObjListByKey(visibleInventory, "trim").map((year, i) => (
-            <div key={"trim-filter-" + i + 1}>
-              <input type="checkbox" />{" "}
-              <label>
-                {year[0]} {year[1]}
-              </label>
-            </div>
-          ))}
-        </div>
-      </FilterCollapse>
-      {/* Body Style */}
-      <FilterCollapse initialState={true} label="Body">
-        <div>
-          {countObjListByKey(visibleInventory, "body").map((year, i) => (
-            <div key={"trim-filter-" + i + 1}>
-              <input type="checkbox" />{" "}
-              <label>
-                {year[0]} {year[1]}
-              </label>
-            </div>
-          ))}
-        </div>
-      </FilterCollapse>
-      {/* Drive Line */}
-      <FilterCollapse initialState={true} label="Body">
-        <div>
-          {countObjListByKey(visibleInventory, "drive").map((year, i) => (
-            <div key={"trim-filter-" + i + 1}>
-              <input type="checkbox" />{" "}
-              <label>
-                {year[0]} {year[1]}
-              </label>
-            </div>
-          ))}
-        </div>
-      </FilterCollapse>
-    </div>
+        </Menu.Items>
+      </Transition>
+    </Menu>
   );
 };
 
