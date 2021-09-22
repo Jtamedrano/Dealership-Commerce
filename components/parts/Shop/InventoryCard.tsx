@@ -1,6 +1,5 @@
 import React from "react";
 import { toIntPrice } from "../../../utils/toIntPrice";
-
 interface Props {
   auto: IAuto;
 }
@@ -9,7 +8,7 @@ const InventoryCard: React.FC<Props> = ({ auto }) => {
   const { year, make, model, msrp, trim, img_url } = auto;
 
   return (
-    <div className="max-w-sm mx-auto w-full bg-white rounded-lg transition-shadow duration-500 ease-in-out shadow-md hover:shadow-lg overflow-hidden">
+    <div className="md:max-w-sm mx-auto w-full bg-white rounded-lg transition-shadow duration-500 ease-in-out shadow-md hover:shadow-lg overflow-hidden">
       <div className="grid grid-rows-card-layout h-full">
         <div className="w-full overflow-hidden border-b-4">
           <img

@@ -30,7 +30,7 @@ const InventoryView = (props: Props) => {
   return (
     <>
       {/* Card */}
-      <div className="grid grid-flow-row grid-cols-3 auto-rows-auto gap-3 mb-4">
+      <div className="grid grid-flow-row md:grid-cols-3 auto-rows-auto gap-3 mb-4 sm:grid-cols-1">
         {data.rootInventory
           .filter((_, i) => {
             return (
