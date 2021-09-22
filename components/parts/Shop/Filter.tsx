@@ -28,10 +28,14 @@ const Filter = (props: Props) => {
     () => initialState
   );
 
-  const handleChange = (e: any, v: number | number[]) => {
+  const handleChange = (_: any, v: number | number[]) => {
     if (typeof v === "object") {
       setValue(v.map((n: number) => n * 1000));
     }
+  };
+
+  const reset = () => {
+    setValue(initialState);
   };
   return (
     <Menu as="div" className="relative">
@@ -60,7 +64,13 @@ const Filter = (props: Props) => {
             <div className="px-2 pt-2">
               <div className="flex justify-between items-center">
                 <p>PRICE RANGE</p>
-                <div className="flex">
+                <div className="flex items-center">
+                  <span
+                    onClick={reset}
+                    className="mr-2 text-blue-400 hover:text-blue-500 cursor-pointer"
+                  >
+                    Reset
+                  </span>
                   <NumberFormat
                     value={value[0]}
                     displayType="text"
