@@ -80,8 +80,15 @@ export const inventoryRed = createSlice({
     changePage: (state, action) => {
       state.inventory_page = action.payload;
     },
+    addPriceFilter: (state, action: { payload: [number, number] }) => {
+      state.filters = { ...state.filters, msrp: action.payload };
+      state.list = state.list.filter(
+        (auto) =>
+          auto.msrp >= action.payload[0] && auto.msrp <= action.payload[1]
+      );
+    },
   },
 });
 
-export const { init, sort, changePage } = inventoryRed.actions;
+export const { init, sort, changePage, addPriceFilter } = inventoryRed.actions;
 export default inventoryRed.reducer;

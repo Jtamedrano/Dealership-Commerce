@@ -10,7 +10,7 @@ import React, {
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NumberFormat from "react-number-format";
-import { RootState } from "../../../store";
+import { AppDispatch, RootState } from "../../../store";
 import { getMinMax } from "../../../utils/getMinMax";
 import { countObjListByKey } from "../../../utils/toCatSet";
 import { toIntPrice } from "../../../utils/toIntPrice";
@@ -28,6 +28,8 @@ const Filter = (props: Props) => {
     () => initialState
   );
 
+  const dispatch = useDispatch<AppDispatch>()
+  
   const handleChange = (_: any, v: number | number[]) => {
     if (typeof v === "object") {
       setValue(v.map((n: number) => n * 1000));
